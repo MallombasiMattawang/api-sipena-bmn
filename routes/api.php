@@ -59,6 +59,22 @@ Route::prefix('admin')->group(function () {
         Route::apiResource('/categories', App\Http\Controllers\Api\Admin\CategoryController::class)
             ->middleware('permission:categories.index|categories.store|categories.update|categories.delete');
 
+        //config Day
+        Route::apiResource('/config-day', App\Http\Controllers\Api\Admin\ConfigDayController::class)
+            ->middleware('permission:layanans.index');
+
+        //Create Tiket
+        Route::apiResource('/tiket', App\Http\Controllers\Api\Admin\LayananTiketController::class)
+            ->middleware('permission:layanans.index');
+
+        //layanans all
+        Route::get('/layanans/all', [\App\Http\Controllers\Api\Admin\LayananController::class, 'all'])
+            ->middleware('permission:layanans.index');
+
+        //Layanans
+        Route::apiResource('/layanans', App\Http\Controllers\Api\Admin\LayananController::class)
+            ->middleware('permission:layanans.index|layanans.store|layanans.update|layanans.delete');
+
         //Posts
         Route::apiResource('/posts', App\Http\Controllers\Api\Admin\PostController::class)
             ->middleware('permission:posts.index|posts.store|posts.update|posts.delete');
