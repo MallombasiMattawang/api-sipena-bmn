@@ -8673,3 +8673,41 @@ Stack trace:
 #38 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
 #39 {main}
 "} 
+[2024-06-03 02:16:37] local.ERROR: Uncaught ReflectionException: Class "Illuminate\Routing\Middleware\ThrottleRequests:60000,1" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionMethod->__construct()
+#1 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught ReflectionException: Class \"Illuminate\\Routing\\Middleware\\ThrottleRequests:60000,1\" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionMethod->__construct()
+#1 {main}
+  thrown at Command line code:1)
+[stacktrace]
+#0 {main}
+"} 
+[2024-06-03 02:16:37] local.ERROR: Uncaught InvalidArgumentException: Please provide a valid cache path. in /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:67
+Stack trace:
+#0 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(96): Illuminate\View\Compilers\Compiler->__construct()
+#1 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/Container/Container.php(908): Illuminate\View\ViewServiceProvider->Illuminate\View\{closure}()
+#2 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build()
+#3 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(957): Illuminate\Container\Container->resolve()
+#4 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve()
+#5 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(942): Illuminate\Container\Container->make()
+#6 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(120): Illuminate\Foundation\Application->make()
+#7 Command line code(1): app()
+#8 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught InvalidArgumentException: Please provide a valid cache path. in /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:67
+Stack trace:
+#0 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(96): Illuminate\\View\\Compilers\\Compiler->__construct()
+#1 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/Container/Container.php(908): Illuminate\\View\\ViewServiceProvider->Illuminate\\View\\{closure}()
+#2 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\\Container\\Container->build()
+#3 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(957): Illuminate\\Container\\Container->resolve()
+#4 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\\Foundation\\Application->resolve()
+#5 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(942): Illuminate\\Container\\Container->make()
+#6 /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(120): Illuminate\\Foundation\\Application->make()
+#7 Command line code(1): app()
+#8 {main}
+  thrown at /home/awan/Project/APP WEB/ETIKETING/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:67)
+[stacktrace]
+#0 {main}
+"} 
