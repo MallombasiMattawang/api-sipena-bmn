@@ -17,7 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/generate', function(){
+Route::get('/generate', function() {
     \Illuminate\Support\Facades\Artisan::call('storage:link');
-    echo 'ok';
- });
+    \Illuminate\Support\Facades\Artisan::call('route:clear');
+     \Illuminate\Support\Facades\Artisan::call('config:clear');
+    \Illuminate\Support\Facades\Artisan::call('cache:clear');
+    \Illuminate\Support\Facades\Artisan::call('view:clear');
+    echo 'Cache dan konfigurasi berhasil dibersihkan!';
+});

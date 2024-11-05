@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ConfigDayResource;
 use App\Models\ConfigDay;
+use App\Models\Holiday;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,6 +22,26 @@ class ConfigDayController extends Controller
 
     public function show($id)
     {
+        $today = date('Y-m-d');
+        $dayOfWeek = date('l', strtotime($today)); // Mendapatkan hari dalam bentuk string, misal: 'Saturday'
+
+        // Cek apakah hari ini adalah hari libur berdasarkan tabel Holiday
+        $cek_holiday = Holiday::where('tgl_libur', $today)->first();
+
+        // Cek apakah hari ini adalah Sabtu atau Minggu
+        $isWeekend = ($dayOfWeek == 'Saturday' || $dayOfWeek == 'Sunday');
+
+        // Jika hari ini adalah hari libur atau hari Sabtu/Minggu
+        if ($cek_holiday || $isWeekend) {
+            ConfigDay::where('id', 1)->update([
+                'status' => 'LIBUR',
+            ]);
+        } else {
+            ConfigDay::where('id', 1)->update([
+                'status' => 'BIASA',
+            ]);
+        }
+
         $today = ConfigDay::whereId($id)->first();
         $day = date('D');
 
@@ -55,5 +76,33 @@ class ConfigDayController extends Controller
 
         //return failed with Api Resource
         return new ConfigDayResource(false, 'Data config Day Gagal Diupdate!', null);
+    }
+
+    public function cekDay($id)
+    {
+
+        $dayOfWeek = date('l', strtotime($id)); // Mendapatkan hari dalam bentuk string, misal: 'Saturday'
+
+        // Cek apakah hari ini adalah hari libur berdasarkan tabel Holiday
+         $cek_holiday = Holiday::where('tgl_libur', $id)->first();
+
+        // Cek apakah hari ini adalah Sabtu atau Minggu
+        $isWeekend = ($dayOfWeek == 'Saturday' || $dayOfWeek == 'Sunday');
+
+
+
+         if ($cek_holiday || $isWeekend) {
+            $data = [
+                'status' => 'LIBUR',
+            ];
+            //return success with Api Resource
+            return new ConfigDayResource(true, 'Hari ini libur', $data);
+        }
+        $data = [
+            'status' => 'BIASA',
+        ];
+
+        //return failed with Api Resource
+        return new ConfigDayResource(false, 'Bukan Hari Libur!', $data);
     }
 }
