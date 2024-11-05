@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AsetResource;
 use App\Models\Aset;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -17,15 +18,36 @@ class AsetController extends Controller
     {
         //get data
         $query = Aset::with('kategori', 'kondisi', 'status', 'lokasi')
-        ->when(request()->search, function ($query) {
-            $query = $query->where('nama_aset', 'like', '%' . request()->search . '%');
-        })->latest()->paginate(25);
+            ->when(request()->search, function ($query) {
+                $query = $query->where('nama_aset', 'like', '%' . request()->search . '%');
+            })->latest()->paginate(25);
 
         //append query string to pagination links
         $query->appends(['search' => request()->search]);
 
         //return with Api Resource
         return new AsetResource(true, 'List Data Aset', $query);
+    }
+
+    public function expired()
+    {
+        // Get the current year
+        $currentYear = Carbon::now()->year;
+
+        // Get data with conditions for expired assets and search functionality
+        $query = Aset::with('kategori', 'kondisi', 'status', 'lokasi')
+            ->whereRaw('tahun_perolehan + masa_pakai <= ?', [$currentYear])
+            ->when(request()->search, function ($query) {
+                $query->where('nama_aset', 'like', '%' . request()->search . '%');
+            })
+            ->latest()
+            ->paginate(25);
+
+        // Append query string to pagination links
+        $query->appends(['search' => request()->search]);
+
+        // Return with Api Resource
+        return new AsetResource(true, 'List Data Aset yang Habis Masa Pakainya', $query);
     }
 
     public function filter()
@@ -55,10 +77,10 @@ class AsetController extends Controller
             // Urutkan berdasarkan tanggal terbaru
             ->latest()
             ->paginate(25);
-    
+
         // Menambahkan query string ke tautan pagination secara otomatis
         $query->appends(request()->all());
-    
+
         // Mengembalikan hasil sebagai API Resource
         return new AsetResource(true, 'List Data Aset', $query);
     }

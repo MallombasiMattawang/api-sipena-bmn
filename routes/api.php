@@ -120,17 +120,19 @@ Route::prefix('admin')->group(function () {
         // Route untuk index dan store (tanpa parameter ID)
         Route::get('/asets', [App\Http\Controllers\Api\Admin\AsetController::class, 'index'])
             ->middleware('permission:asets.index');
-            Route::get('/asets-filter/{kategori?}/{kondisi?}/{status?}/{lokasi?}', [App\Http\Controllers\Api\Admin\AsetController::class, 'filter']);
+        Route::get('/asets-expired', [App\Http\Controllers\Api\Admin\AsetController::class, 'expired'])
+            ->middleware('permission:asets.index');
+        Route::get('/asets-filter/{kategori?}/{kondisi?}/{status?}/{lokasi?}', [App\Http\Controllers\Api\Admin\AsetController::class, 'filter']);
         Route::post('/asets', [App\Http\Controllers\Api\Admin\AsetController::class, 'store']);
-            // ->middleware('permission:asets.store');
+        // ->middleware('permission:asets.store');
 
         // Route untuk show, update, dan destroy (dengan parameter ID)
         Route::get('/asets/{id}', [App\Http\Controllers\Api\Admin\AsetController::class, 'show']);
-            // ->middleware('permission:asets.show');
+        // ->middleware('permission:asets.show');
         Route::put('/asets/{id}', [App\Http\Controllers\Api\Admin\AsetController::class, 'update']);
-            // ->middleware('permission:asets.update');
+        // ->middleware('permission:asets.update');
         Route::delete('/asets/{id}', [App\Http\Controllers\Api\Admin\AsetController::class, 'destroy']);
-            // ->middleware('permission:asets.delete');
+        // ->middleware('permission:asets.delete');
 
         // Route kategori aset untuk index dan store (tanpa parameter ID)
         Route::get('/kategori-asets', [App\Http\Controllers\Api\Admin\KategoriAsetController::class, 'index']);
@@ -193,21 +195,21 @@ Route::prefix('admin')->group(function () {
         Route::delete('/lokasi-asets/{id}', [App\Http\Controllers\Api\Admin\LokasiAsetController::class, 'destroy']);
         // ->middleware('permission:asets.delete');   
 
-         // Route masa aset untuk index dan store (tanpa parameter ID)
-         Route::get('/masa-asets', [App\Http\Controllers\Api\Admin\MasaAsetController::class, 'index']);
-         Route::get('/masa-asets/all', [App\Http\Controllers\Api\Admin\MasaAsetController::class, 'all']);
-         // ->middleware('permission:asets.index');
-         Route::post('/masa-asets', [App\Http\Controllers\Api\Admin\MasaAsetController::class, 'store']);
-         // ->middleware('permission:asets.store');
- 
-         // Route untuk show, update, dan destroy (dengan parameter ID)
-         Route::get('/masa-asets/{id}', [App\Http\Controllers\Api\Admin\MasaAsetController::class, 'show']);
-         // ->middleware('permission:asets.show');
-         Route::put('/masa-asets/{id}', [App\Http\Controllers\Api\Admin\MasaAsetController::class, 'update']);
-         // ->middleware('permission:asets.update');
-         Route::delete('/masa-asets/{id}', [App\Http\Controllers\Api\Admin\MasaAsetController::class, 'destroy']);
-         // ->middleware('permission:asets.delete');  
-        
+        // Route masa aset untuk index dan store (tanpa parameter ID)
+        Route::get('/masa-asets', [App\Http\Controllers\Api\Admin\MasaAsetController::class, 'index']);
+        Route::get('/masa-asets/all', [App\Http\Controllers\Api\Admin\MasaAsetController::class, 'all']);
+        // ->middleware('permission:asets.index');
+        Route::post('/masa-asets', [App\Http\Controllers\Api\Admin\MasaAsetController::class, 'store']);
+        // ->middleware('permission:asets.store');
+
+        // Route untuk show, update, dan destroy (dengan parameter ID)
+        Route::get('/masa-asets/{id}', [App\Http\Controllers\Api\Admin\MasaAsetController::class, 'show']);
+        // ->middleware('permission:asets.show');
+        Route::put('/masa-asets/{id}', [App\Http\Controllers\Api\Admin\MasaAsetController::class, 'update']);
+        // ->middleware('permission:asets.update');
+        Route::delete('/masa-asets/{id}', [App\Http\Controllers\Api\Admin\MasaAsetController::class, 'destroy']);
+        // ->middleware('permission:asets.delete');  
+
         // Route inspeksi aset untuk index dan store (tanpa parameter ID)
         Route::get('/inspeksi-asets', [App\Http\Controllers\Api\Admin\InspeksiAsetController::class, 'index']);
         Route::get('/inspeksi-asets/all', [App\Http\Controllers\Api\Admin\InspeksiAsetController::class, 'all']);
@@ -224,8 +226,8 @@ Route::prefix('admin')->group(function () {
         // ->middleware('permission:asets.update');
         Route::delete('/inspeksi-asets/{id}', [App\Http\Controllers\Api\Admin\InspeksiAsetController::class, 'destroy']);
         // ->middleware('permission:asets.delete');   
-        
-          
+
+
     });
 });
 
